@@ -129,16 +129,23 @@ try:
     logger.info( 'post done ...' ) # logger
     t1 = datetime.now();
     logger.info( 'got time ...' ) # logger
-    log_result = 'time=\"%s\", message=\"Updated lookup file %s in app %s.\"' % (t1, postFile, app)
-    logger.error(log_result)
+    log_result = 'time=\"%s\", app=\"%s\", filename=\"%s\", message=\"Updated lookup file\"' % (t1, app, postFile)
+    logger.setLevel(logging.DEBUG)
+    logger.info(log_result)
+    logger.setLevel(logging.ERROR)
     results = []
     result = {}
     logger.info( 'setup results & result...' ) # logger
     result['_time'] = t1
-    result['message'] = 'Updated lookup file %s in app %s.' % (postFile, app)
+    result['app'] = '%s' % (app)
+    result['filename'] = '%s' % (postFile)
+    result['message'] = 'Updated lookup file'
     results.append(result)
     splunk.Intersplunk.outputResults(results)
 
 except Exception, e:
-    logger.info( 'error during update ...' ) # logger
+    #logger.info( 'error during update ...' ) # logger
+    t1 = datetime.now();
+    log_error = 'time=\"%s\", app=\"%s\", filename=\"%s\", message=\"Error during update\"' % (t1, app, postFile)
+    logger.error(log_error)
     splunk.Intersplunk.generateErrorResults(': error during update ...')
