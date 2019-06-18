@@ -16,7 +16,7 @@ Nothing to see here, move along.
 
 **Debug**
 
-Debug option can be enabled in the script handler `LoookupUpdate.py` by
+Debug option can be enabled in the script handler `LookupUpdate.py` by
 changing  `myDebug = no` to `myDebug = yes`.
 
 **Support**
